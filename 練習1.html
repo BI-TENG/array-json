@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 陣列
+        let data = [
+            {
+                time: "時段一",
+                weather: [18.2, 17.3, 15.0, 13.4]
+            },
+
+            {
+                time: "時段二",
+                weather: [23.8, 25.1, 20.6, 17.8]
+            },
+            {
+                time: "時段三",
+                weather: [20.6, 21.5, 18.4, 15.7]
+            },
+
+        ]
+
+        document.write(`
+      <table border="1", style="text-align:center">
+        <tr>
+          <td></td>
+          <td>星期一</td>
+          <td>星期二</td>
+          <td>星期三</td>
+          <td>星期四</td>
+        </tr>`)
+        for (let d of data) {
+            document.write(`
+            <tr>
+            <td>${d.time}</td>
+            <td>${d.weather[0]}</td>
+            <td>${d.weather[1]}</td>
+            <td>${d.weather[2]}</td>
+            <td>${d.weather[3]}</td>
+            </tr >
+            `)
+        }
+        document.write(`</table >`)
+        document.write(`<hr/>`)
+
+        // 每日平均溫度
+        let total0 = 0;
+        for (let week of data) {
+            total0 += week.weather[0];
+        }
+        document.write(`星期一的平均溫度：${(total0 / Object.keys(data).length).toFixed(1)}℃<br/>`);
+
+        let total1 = 0;
+        for (let week of data) {
+            total1 += week.weather[1];
+        }
+        document.write(`星期二的平均溫度：${(total1 / Object.keys(data).length).toFixed(1)}℃<br/>`);
+
+        let total2 = 0;
+        for (let week of data) {
+            total2 += week.weather[2];
+        }
+        document.write(`星期三的平均溫度：${(total2 / Object.keys(data).length).toFixed(1)}℃<br/>`);
+
+        let total3 = 0;
+        for (let week of data) {
+            total3 += week.weather[3];
+        }
+        document.write(`星期四的平均溫度：${(total3 / Object.keys(data).length).toFixed(1)}℃`);
+        document.write(`<hr/>`)
+
+        // 平均氣溫
+        let total4 = 0;
+        for (let times of data) {
+            for (i = 0; i < times.weather.length; i++) {
+                total4 += times.weather[i];
+            }
+            document.write(`${times.time}的平均氣溫： ${(total4 / times.weather.length).toFixed(1)} ℃<br/>`)
+            total4 = 0;
+        }
+        document.write(`<hr/>`)
+
+        // 最高、最低
+        let max = 0;
+        for (let high of data) {
+            for (let a in data) {
+                for (let i = 0; i < high.weather.length; i++) {
+                    if (high.weather[i] > max) {
+                        max = high.weather[i]
+                    }
+                }
+            }
+        }
+        document.write(`${max}<br/>`)
+
+        let min = (`${max}`);
+        for (let low of data) {
+            for (let b in data) {
+                for (let j = 0; j < low.weather.length; j++) {
+                    if (low.weather[j] < min) {
+                        min = low.weather[j]
+                    }
+                }
+            }
+        }
+        document.write(`${min}`)
+    </script>
+</body>
+
+</html>
